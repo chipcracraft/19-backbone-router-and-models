@@ -374,46 +374,25 @@ img {
 body {
   font-family: 'Abhaya Libre', 'Palatino', serif; }
 
-#app-container ul {
-  padding-left: 10px;
-  list-style-type: none; }
-#app-container .book-listing {
-  height: 240px;
-  margin-bottom: 10px;
-  padding: 6px; }
-  #app-container .book-listing img {
-    height: 180px;
-    max-width: 100%;
-    width: initial;
-    border: 1px solid #333; }
-#app-container .breadcrumb {
-  font-size: 21px;
-  background: #E6DECE;
-  font-family: Roboto;
-  font-weight: 200; }
-  #app-container .breadcrumb .active {
-    color: #1E2A43; }
-
-header {
+#app-container header {
   background: #1E2A43;
   padding: 15px; }
-  header img {
+  #app-container header img {
     max-width: 300px;
     margin: 0 auto; }
-
-nav {
+#app-container nav {
   font-size: 0;
   font-family: "Roboto", "Helvetica", "sans-serif";
   background: #BE1924;
   color: #fff;
   font-size: 0;
   letter-spacing: 0; }
-  nav > * {
+  #app-container nav > * {
     vertical-align: top;
     font-size: initial;
     letter-spacing: initial;
     display: inline-block; }
-  nav span {
+  #app-container nav span {
     border: 2px #BE1924 solid;
     text-align: center;
     width: 20%;
@@ -421,8 +400,18 @@ nav {
     display: inline-block;
     font-weight: 700;
     padding: 10px 0; }
-    nav span.active {
+    #app-container nav span.active {
       color: #BE1924;
       background: #fff; }
+
+.book-thumb {
+  width: 78%; }
+
+ul {
+  padding-left: 0; }
+
+li {
+  list-style-type: none;
+  text-align: left; }
 
 /*# sourceMappingURL=styles.css.map */

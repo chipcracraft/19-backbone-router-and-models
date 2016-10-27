@@ -27,21 +27,13 @@ var BookCollection = Backbone.Collection.extend({
 var AppRouter = Backbone.Router.extend({
 
         routes: {
-            "books/:general/:sub-category" : "showSubcategory",
+            "books/:general/:sub-category" : "showGenCategory",
             "books/:general" : "showGenCategory",
             "" : "showHomePage"
 
         },
 
 
-        showSubcategory: function(bookCat){
-
-                var newSubCat = new BookCollection(bookSubs)
-                newSubCat.fetch().then(function(){
-
-                })
-
-        },
 
         showGenCategory: function(bookCat){
             console.log(bookCat)
@@ -51,23 +43,29 @@ var AppRouter = Backbone.Router.extend({
                 newCat.fetch().then(function(){
                   console.log(newCat.models)
                         var bigHTMLStr = ''
+
                   newCat.models.forEach(function(modelObj){
+                    var catBook = modelObj.get('categories')
                     var mainBooks = modelObj.get('title')
                     var bookImg = modelObj.get('imageLinks')
-                          if (bookImg.thumbnail ==="undefined") {
-                              return '<img src="images/file-not-found.png">'
+
+                          if (bookImg === undefined) {
+                            var imageLinks = new Object({
+                              thumbnail: "images/file-not-found.png"
+                            })
+                            modelObj.set('imageLinks', imageLinks)
+                            bookImg = modelObj.get('imageLinks')
                           } else {
-                              bookImg.thumbnail
+                             bookImg.thumbnail
                           }
 
-                      console.log(mainBooks)
-                            bigHTMLStr += '<div class="col-sm-3">'
-                            bigHTMLStr += '<div class="thumbnail">'
-                            bigHTMLStr += '<img src= "'+bookImg.thumbnail+'">'
-                            bigHTMLStr += '<p>'+mainBooks+ '</p>'
-                            bigHTMLStr += '</div>'
-                            bigHTMLStr += '</div>'
 
+                            bigHTMLStr += '<div class="col-xs-12 col-sm-3">'
+                            bigHTMLStr +=   '<div class="thumbnail book-thumb">'
+                            bigHTMLStr +=     '<img src="'+ bookImg.thumbnail +'">'
+                            bigHTMLStr +=       '<p>'+mainBooks+ '</p>'
+                            bigHTMLStr +=   '</div>'
+                            bigHTMLStr += ' </div>'
                 })
                 document.querySelector('.content-area').innerHTML = bigHTMLStr
 
@@ -84,11 +82,16 @@ showHomePage: function(genBookInfo){
   ]
               var bigHTMLStr = ''
       categoryListings.forEach(function(obj){
-              bigHTMLStr += '<div class="col-sm-4">'
+              bigHTMLStr += '<div class="col-sm-4 class="text-left"">'
+              bigHTMLStr += '<a href="#books/'+obj.catName+'">'
               bigHTMLStr += '<h1>' + obj.catName + '</h1>'
+              bigHTMLStr += '</a>'
               bigHTMLStr += '<ul>'
           for(var i = 0; i < obj.subcatList.length; i++){
+              bigHTMLStr += '<a href="#books/'+obj.subcatList[i]+'">'
               bigHTMLStr += '<li>' +obj.subcatList[i] + '</li>'
+              bigHTMLStr += '</a>'
+
           }
               bigHTMLStr +=  '</ul>'
               bigHTMLStr += '</div>'
